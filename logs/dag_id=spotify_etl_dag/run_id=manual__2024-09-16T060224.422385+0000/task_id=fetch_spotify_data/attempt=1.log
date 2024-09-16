@@ -1,0 +1,169 @@
+[2024-09-16T06:02:27.975+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-09-16T06:02:27.988+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: spotify_etl_dag.fetch_spotify_data manual__2024-09-16T06:02:24.422385+00:00 [queued]>
+[2024-09-16T06:02:27.993+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: spotify_etl_dag.fetch_spotify_data manual__2024-09-16T06:02:24.422385+00:00 [queued]>
+[2024-09-16T06:02:27.994+0000] {taskinstance.py:2865} INFO - Starting attempt 1 of 1
+[2024-09-16T06:02:28.002+0000] {taskinstance.py:2888} INFO - Executing <Task(PythonOperator): fetch_spotify_data> on 2024-09-16 06:02:24.422385+00:00
+[2024-09-16T06:02:28.008+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=496) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-09-16T06:02:28.010+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'spotify_etl_dag', 'fetch_spotify_data', 'manual__2024-09-16T06:02:24.422385+00:00', '--job-id', '21', '--raw', '--subdir', 'DAGS_FOLDER/spotify_***_pipeline.py', '--cfg-path', '/tmp/tmp4__yvglp']
+[2024-09-16T06:02:28.010+0000] {standard_task_runner.py:72} INFO - Started process 498 to run task
+[2024-09-16T06:02:28.011+0000] {standard_task_runner.py:105} INFO - Job 21: Subtask fetch_spotify_data
+[2024-09-16T06:02:28.044+0000] {task_command.py:467} INFO - Running <TaskInstance: spotify_etl_dag.fetch_spotify_data manual__2024-09-16T06:02:24.422385+00:00 [running]> on host eabfb3f09221
+[2024-09-16T06:02:28.099+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='nihitverma' AIRFLOW_CTX_DAG_ID='spotify_etl_dag' AIRFLOW_CTX_TASK_ID='fetch_spotify_data' AIRFLOW_CTX_EXECUTION_DATE='2024-09-16T06:02:24.422385+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-09-16T06:02:24.422385+00:00'
+[2024-09-16T06:02:28.101+0000] {logging_mixin.py:190} INFO - Task instance is in running state
+[2024-09-16T06:02:28.101+0000] {logging_mixin.py:190} INFO -  Previous state of the Task instance: queued
+[2024-09-16T06:02:28.102+0000] {logging_mixin.py:190} INFO - Current task name:fetch_spotify_data state:running start_date:2024-09-16 06:02:27.989296+00:00
+[2024-09-16T06:02:28.102+0000] {logging_mixin.py:190} INFO - Dag name:spotify_etl_dag and current dag run status:running
+[2024-09-16T06:02:28.102+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-09-16T06:02:28.345+0000] {taskinstance.py:3310} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/spotipy/oauth2.py", line 256, in _request_access_token
+    response.raise_for_status()
+  File "/home/airflow/.local/lib/python3.12/site-packages/requests/models.py", line 1024, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://accounts.spotify.com/api/token
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/spotify_airflow_pipeline.py", line 42, in _fetch_spotify_data
+    playlists = sp.user_playlists('spotify')
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/spotipy/client.py", line 812, in user_playlists
+    return self._get(
+           ^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/spotipy/client.py", line 327, in _get
+    return self._internal_call("GET", url, payload, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/spotipy/client.py", line 251, in _internal_call
+    headers = self._auth_headers()
+              ^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/spotipy/client.py", line 242, in _auth_headers
+    token = self.auth_manager.get_access_token(as_dict=False)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/spotipy/oauth2.py", line 229, in get_access_token
+    token_info = self._request_access_token()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/spotipy/oauth2.py", line 260, in _request_access_token
+    self._handle_oauth_error(http_error)
+  File "/home/airflow/.local/lib/python3.12/site-packages/spotipy/oauth2.py", line 139, in _handle_oauth_error
+    raise SpotifyOauthError(
+spotipy.oauth2.SpotifyOauthError: error: invalid_client, error_description: Invalid client secret
+[2024-09-16T06:02:28.359+0000] {logging_mixin.py:190} INFO - Task instance in failure state
+[2024-09-16T06:02:28.359+0000] {logging_mixin.py:190} INFO - Task start:2024-09-16 06:02:27.989296+00:00 end:2024-09-16 06:02:28.358876+00:00 duration:0.36958
+[2024-09-16T06:02:28.360+0000] {logging_mixin.py:190} INFO - Task:<Task(PythonOperator): fetch_spotify_data> dag:<DAG: spotify_etl_dag> dagrun:<DagRun spotify_etl_dag @ 2024-09-16 06:02:24.422385+00:00: manual__2024-09-16T06:02:24.422385+00:00, state:running, queued_at: 2024-09-16 06:02:24.451458+00:00. externally triggered: True>
+[2024-09-16T06:02:28.360+0000] {logging_mixin.py:190} INFO - Failure caused by error: invalid_client, error_description: Invalid client secret
+[2024-09-16T06:02:28.361+0000] {taskinstance.py:1225} INFO - Marking task as FAILED. dag_id=spotify_etl_dag, task_id=fetch_spotify_data, run_id=manual__2024-09-16T06:02:24.422385+00:00, execution_date=20240916T060224, start_date=20240916T060227, end_date=20240916T060228
+[2024-09-16T06:02:28.374+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-09-16T06:02:28.375+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 21 for task fetch_spotify_data (error: invalid_client, error_description: Invalid client secret; 498)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/spotipy/oauth2.py", line 256, in _request_access_token
+    response.raise_for_status()
+  File "/home/airflow/.local/lib/python3.12/site-packages/requests/models.py", line 1024, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://accounts.spotify.com/api/token
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/cli.py", line 115, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3004, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 273, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3158, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3182, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/spotify_airflow_pipeline.py", line 42, in _fetch_spotify_data
+    playlists = sp.user_playlists('spotify')
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/spotipy/client.py", line 812, in user_playlists
+    return self._get(
+           ^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/spotipy/client.py", line 327, in _get
+    return self._internal_call("GET", url, payload, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/spotipy/client.py", line 251, in _internal_call
+    headers = self._auth_headers()
+              ^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/spotipy/client.py", line 242, in _auth_headers
+    token = self.auth_manager.get_access_token(as_dict=False)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/spotipy/oauth2.py", line 229, in get_access_token
+    token_info = self._request_access_token()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/spotipy/oauth2.py", line 260, in _request_access_token
+    self._handle_oauth_error(http_error)
+  File "/home/airflow/.local/lib/python3.12/site-packages/spotipy/oauth2.py", line 139, in _handle_oauth_error
+    raise SpotifyOauthError(
+spotipy.oauth2.SpotifyOauthError: error: invalid_client, error_description: Invalid client secret
+[2024-09-16T06:02:28.386+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2024-09-16T06:02:28.399+0000] {taskinstance.py:3900} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-09-16T06:02:28.401+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

@@ -1,0 +1,29 @@
+[2024-09-16T06:53:59.498+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-09-16T06:53:59.510+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: spotify_etl_dag.upload_raw_to_s3 manual__2024-09-16T06:53:55.232884+00:00 [queued]>
+[2024-09-16T06:53:59.517+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: spotify_etl_dag.upload_raw_to_s3 manual__2024-09-16T06:53:55.232884+00:00 [queued]>
+[2024-09-16T06:53:59.518+0000] {taskinstance.py:2865} INFO - Starting attempt 1 of 1
+[2024-09-16T06:53:59.527+0000] {taskinstance.py:2888} INFO - Executing <Task(S3CreateObjectOperator): upload_raw_to_s3> on 2024-09-16 06:53:55.232884+00:00
+[2024-09-16T06:53:59.532+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=1188) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-09-16T06:53:59.534+0000] {standard_task_runner.py:72} INFO - Started process 1190 to run task
+[2024-09-16T06:53:59.534+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'spotify_etl_dag', 'upload_raw_to_s3', 'manual__2024-09-16T06:53:55.232884+00:00', '--job-id', '25', '--raw', '--subdir', 'DAGS_FOLDER/spotify_***_pipeline.py', '--cfg-path', '/tmp/tmpjfz75c2w']
+[2024-09-16T06:53:59.535+0000] {standard_task_runner.py:105} INFO - Job 25: Subtask upload_raw_to_s3
+[2024-09-16T06:53:59.570+0000] {task_command.py:467} INFO - Running <TaskInstance: spotify_etl_dag.upload_raw_to_s3 manual__2024-09-16T06:53:55.232884+00:00 [running]> on host eabfb3f09221
+[2024-09-16T06:53:59.649+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='nihitverma' AIRFLOW_CTX_DAG_ID='spotify_etl_dag' AIRFLOW_CTX_TASK_ID='upload_raw_to_s3' AIRFLOW_CTX_EXECUTION_DATE='2024-09-16T06:53:55.232884+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-09-16T06:53:55.232884+00:00'
+[2024-09-16T06:53:59.650+0000] {logging_mixin.py:190} INFO - Task instance is in running state
+[2024-09-16T06:53:59.651+0000] {logging_mixin.py:190} INFO -  Previous state of the Task instance: queued
+[2024-09-16T06:53:59.652+0000] {logging_mixin.py:190} INFO - Current task name:upload_raw_to_s3 state:running start_date:2024-09-16 06:53:59.511998+00:00
+[2024-09-16T06:53:59.653+0000] {logging_mixin.py:190} INFO - Dag name:spotify_etl_dag and current dag run status:running
+[2024-09-16T06:53:59.654+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-09-16T06:53:59.664+0000] {base.py:84} INFO - Retrieving connection 'aws_conn'
+[2024-09-16T06:53:59.665+0000] {connection_wrapper.py:388} INFO - AWS Connection (conn_id='aws_conn', conn_type='aws') credentials retrieved from login and password.
+[2024-09-16T06:54:02.141+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-09-16T06:54:02.141+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=spotify_etl_dag, task_id=upload_raw_to_s3, run_id=manual__2024-09-16T06:53:55.232884+00:00, execution_date=20240916T065355, start_date=20240916T065359, end_date=20240916T065402
+[2024-09-16T06:54:02.149+0000] {logging_mixin.py:190} INFO - Task instance in success state
+[2024-09-16T06:54:02.149+0000] {logging_mixin.py:190} INFO -  Previous state of the Task instance: running
+[2024-09-16T06:54:02.150+0000] {logging_mixin.py:190} INFO - Dag name:spotify_etl_dag queued_at:2024-09-16 06:53:55.240158+00:00
+[2024-09-16T06:54:02.150+0000] {logging_mixin.py:190} INFO - Task hostname:eabfb3f09221 operator:S3CreateObjectOperator
+[2024-09-16T06:54:02.162+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2024-09-16T06:54:02.185+0000] {taskinstance.py:3900} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-09-16T06:54:02.186+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
