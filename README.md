@@ -55,6 +55,4 @@ pip install apache-airflow boto3 pandas spotipy
 
 ![spotify-airflow-project](https://github.com/user-attachments/assets/61b37c78-b6b6-42c0-8525-d703a8c721e2)
 
-## 🔗 Links
-
 
